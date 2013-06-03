@@ -4,8 +4,12 @@ body {
 	color: #555;
 }
 
-body >p {
+body > p, footer > p {
 	text-align:center;
+}
+
+footer > p {
+	font-size: 12px;
 }
 
 h1 {

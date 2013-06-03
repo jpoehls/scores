@@ -47,6 +47,12 @@
 	</div>
 {{ end }}
 
+<footer>
+	{{ if .Records }}
+		<p><i>This board has been updated {{.ActivityCount}} times.</i></p>
+	{{ end }}
+</footer>
+
 <script src="/static/jquery.min.js"></script>
 <script src="/static/scripts.js"></script>
 
