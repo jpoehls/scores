@@ -1,0 +1,59 @@
+<html>
+<head>
+	<title>{{.Team}} / {{.Name}}</title>
+	<link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+
+<h1><span>{{.Team}} /</span> {{.Name}}</h1>
+
+{{ if .Records }}
+	{{ if .Desc }}
+		<p contenteditable="true" id="board-desc">{{.Desc}}</p>
+	{{ else }}
+		<p contenteditable="true" id="board-desc">Click to enter a spiffy proclamation for this board.</p>
+	{{ end }}
+{{ end }}
+
+{{ range $index, $element := takeTop .Records 3 }}
+	<div class="record badged">
+		<div class="who">{{.Who}}</div>
+		<div class="when">{{formatTime .When "Jan 2, 2006"}}</div>
+		<div class="score">{{.Score}}</div>
+		<div class="badge-{{$index}}"></div>
+	</div>
+
+{{ else }}
+	<p><b>You're the first!</b>
+		<br/>This board hasn't been started yet.
+		You're record will be the first!</p>
+{{ end }}
+
+<div class="new-record">
+	<form action="/{{.Team}}/{{.Name}}" method="POST">
+		<input type="text" name="who" placeholder="Name" required />
+		<input type="email" name="email" placeholder="Email" />
+		<input type="number" name="score" placeholder="Score" min="0" max="9999" required />
+		<input type="submit" value="Post" />
+	</form>
+</div>
+
+{{ range skipTop .Records 3 }}
+	<div class="record">
+		<div class="who">{{.Who}}</div>
+		<div class="when">{{formatTime .When "Jan 2, 2006"}}</div>
+		<div class="score">{{.Score}}</div>
+	</div>
+{{ end }}
+
+<script>
+	(function() {
+		var bdesc = document.getElementById('board-desc');
+		bdesc.addEventListener('blur', function() {
+			
+		});
+	}())
+</script>
+
+</body>
+</html>

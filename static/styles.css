@@ -1,0 +1,110 @@
+body {
+	background-color: #eee;
+	font-family: Helvetica, Arial, sans-serif;
+	color: #555;
+}
+
+body >p {
+	text-align:center;
+}
+
+h1 {
+	text-align: center;
+	color: #555;
+	font-weight: normal;
+}
+
+h1 span {
+	font-size: .8em;
+	color: #bbb;
+	font-weight: normal;
+}
+
+.badge-0, .badge-1, .badge-2 {
+	height: 100%;
+	width: 30px;
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.badge-0 {
+	background-color: #D9A441;
+}
+
+.badge-1 {
+	background-color: #CCC2C2;
+}
+
+.badge-2 {
+	background-color: #965A38;
+}
+
+#board-desc {
+	width: 380px;
+	margin: 0 auto;
+	margin-bottom: 10px;
+	padding: 10px;
+}
+
+.record {
+	width: 380px;
+	margin: 0 auto;
+	border: 1px solid #ddd;
+	position: relative;
+	padding: 10px;
+}
+
+.record+.record {
+	border-top: 0;
+}
+
+.new-record {
+	background-color: #fcfcfc;
+	width: 380px;
+	margin: 15px auto;
+	padding: 10px;
+	border: 1px solid #ddd;
+}
+
+.new-record label {
+	display: inline-block;
+	padding-bottom: 5px;
+}
+
+.new-record label > span {
+	display: inline-block;
+	width: 45px;
+	text-align: right;
+	font-size: 13px;
+}
+
+.new-record label > input {
+	width: 120px;
+	padding: .4em;
+}
+
+.who {
+	font-weight: bold;
+	font-size: 18px;
+}
+
+.when {
+	font-size: 13px;
+	padding-top: 5px;
+	color: #777;
+}
+
+.score {
+	position: absolute;
+	top: 0;
+	right: 10px;
+	font-size: 28px;
+	font-weight: bold;
+	margin-top: 15px;
+	text-align: right;
+}
+
+.record.badged .score {
+	right:40px;
+}
