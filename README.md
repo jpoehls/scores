@@ -8,7 +8,7 @@ any number of boards.
 
 Teams and boards are controlled by a simple URL scheme.
 
-Example: http://scores.zduck.com/{team}/{board}
+Example: `http://scores.zduck.com/{team}/{board}`
 
 There isn't any privacy or security for your board, the URL
 is your only protection.
