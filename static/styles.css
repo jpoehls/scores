@@ -67,23 +67,6 @@ h1 span {
 	border: 1px solid #ddd;
 }
 
-.new-record label {
-	display: inline-block;
-	padding-bottom: 5px;
-}
-
-.new-record label > span {
-	display: inline-block;
-	width: 45px;
-	text-align: right;
-	font-size: 13px;
-}
-
-.new-record label > input {
-	width: 120px;
-	padding: .4em;
-}
-
 .who {
 	font-weight: bold;
 	font-size: 18px;
