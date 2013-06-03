@@ -10,18 +10,17 @@ import (
 	"time"
 )
 
-/*
-	/{team}/{board}
-*/
-
+// Use a regex to parse the team and board name from the URL.
 var urlValidator = regexp.MustCompile("^/([a-zA-Z0-9\\-]+)/([a-zA-Z0-9\\-]+)$")
 
 var views *template.Template
 
+// Helper function for formatting timestamps in our templates.
 func formatTime(t *time.Time, layout string) string {
 	return t.Format(layout)
 }
 
+// Helper function for grabbing the first X records in our template.
 func takeTop(s Records, top int) Records {
 	if len(s) > top {
 		return s[:top]
@@ -30,6 +29,7 @@ func takeTop(s Records, top int) Records {
 	}
 }
 
+// Helper function for grabbing all /except/ the first X records in our template.
 func skipTop(s Records, top int) Records {
 	if len(s) > top {
 		return s[top:]
@@ -38,6 +38,8 @@ func skipTop(s Records, top int) Records {
 	}
 }
 
+// Wrap a handler in logic that parses the team and board tokens from the URL
+// and loads the Board instance for our handler to work with easily.
 func makeBoardHandler(fn func(http.ResponseWriter, *http.Request, *Board)) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		//println("URL: " + r.URL.Path)
@@ -104,6 +106,7 @@ func viewHandler(w http.ResponseWriter, r *http.Request, board *Board) {
 		}
 
 		if !recordUpdated {
+			// If we didn't find an existing record to update then add a new one.
 			board.Records = append(board.Records, &Record{Who: who, When: when, Score: score})
 		}
 
@@ -132,15 +135,20 @@ func viewHandler(w http.ResponseWriter, r *http.Request, board *Board) {
 }
 
 func init() {
+
+	// Register helper functions to make them available in the templates.
 	funcMap := template.FuncMap{
 		"formatTime": formatTime,
 		"takeTop":    takeTop,
 		"skipTop":    skipTop,
 	}
 
+	// Compile our template.
 	views = template.Must(template.New("board.gohtml").Funcs(funcMap).ParseFiles("./views/board.gohtml"))
 
+	// Register our HTTP handlers.
 	http.HandleFunc("/", makeBoardHandler(viewHandler))
 
+	// ... including a static file server.
 	http.Handle("/static/", http.FileServer(http.Dir("./")))
 }
