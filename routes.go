@@ -11,7 +11,7 @@ import (
 )
 
 // Use a regex to parse the team and board name from the URL.
-var urlValidator = regexp.MustCompile("^/([a-zA-Z0-9\\-]+)/([a-zA-Z0-9\\-]+)(/([a-zA-Z0-9\\-]+))?$")
+var urlValidator = regexp.MustCompile("^/([a-zA-Z0-9\\-]+)/([a-zA-Z0-9\\-]+)(/([a-zA-Z0-9\\-]+))?/?$")
 
 var views *template.Template
 
