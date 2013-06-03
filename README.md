@@ -28,4 +28,5 @@ Only the top 10 scores are kept.
 ### Server-wise
 
 * Use a Github hook to automatically rebuild and restart the app when updates are pushed on the master branch.
+	* Or, setup pushing to a git repo on the server and use a hook to rebuild/restart the app that way.
 * Create an `upstart` service script to use to manage the process on the server.
