@@ -116,6 +116,7 @@ func viewHandler(w http.ResponseWriter, r *http.Request, board *Board, action st
 					board.Records[i].Who = who
 					board.Records[i].When = when
 					board.Records[i].Score = score
+					board.ActivityCount++
 					recordUpdated = true
 					break
 				}
@@ -125,6 +126,7 @@ func viewHandler(w http.ResponseWriter, r *http.Request, board *Board, action st
 		if !recordUpdated {
 			// If we didn't find an existing record to update then add a new one.
 			board.Records = append(board.Records, &Record{Who: who, When: when, Score: score})
+			board.ActivityCount++
 		}
 
 		// Sort the board's scores.

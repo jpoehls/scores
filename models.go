@@ -8,10 +8,11 @@ import (
 )
 
 type Board struct {
-	Team    string  `json:"team"`
-	Name    string  `json:"name"`
-	Desc    string  `json:"desc"`
-	Records Records `json:"records"`
+	Team          string  `json:"team"`
+	Name          string  `json:"name"`
+	Desc          string  `json:"desc"`
+	Records       Records `json:"records"`
+	ActivityCount int64   `json:"activityCount"`
 }
 
 // Create a slice type for our Records so that we can implement
