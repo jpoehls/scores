@@ -11,7 +11,7 @@ import (
 )
 
 // Use a regex to parse the team and board name from the URL.
-var urlValidator = regexp.MustCompile("^/([a-zA-Z0-9\\-]+)/([a-zA-Z0-9\\-]+)$")
+var urlValidator = regexp.MustCompile("^/([a-zA-Z0-9\\-]+)/([a-zA-Z0-9\\-]+)(/([a-zA-Z0-9\\-]+))?$")
 
 var views *template.Template
 
@@ -40,7 +40,7 @@ func skipTop(s Records, top int) Records {
 
 // Wrap a handler in logic that parses the team and board tokens from the URL
 // and loads the Board instance for our handler to work with easily.
-func makeBoardHandler(fn func(http.ResponseWriter, *http.Request, *Board)) http.HandlerFunc {
+func makeBoardHandler(fn func(http.ResponseWriter, *http.Request, *Board, string)) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		//println("URL: " + r.URL.Path)
 		m := urlValidator.FindStringSubmatch(r.URL.Path)
@@ -55,11 +55,28 @@ func makeBoardHandler(fn func(http.ResponseWriter, *http.Request, *Board)) http.
 			return
 		}
 
-		fn(w, r, board)
+		fn(w, r, board, m[4])
 	}
 }
 
-func viewHandler(w http.ResponseWriter, r *http.Request, board *Board) {
+func descHandler(w http.ResponseWriter, r *http.Request, board *Board) {
+	if r.Method == "POST" {
+		newDesc := strings.TrimSpace(r.FormValue("desc"))
+
+		board.Desc = newDesc
+		if err := board.Save(); err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+	}
+}
+
+func viewHandler(w http.ResponseWriter, r *http.Request, board *Board, action string) {
+	if strings.EqualFold(action, "desc") {
+		descHandler(w, r, board)
+		return
+	}
+
 	if r.Method == "POST" {
 		who := strings.TrimSpace(r.FormValue("who"))
 		if who == "" {
