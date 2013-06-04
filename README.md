@@ -22,8 +22,6 @@ Only the top 10 scores are kept.
 #### Features
 
 * Use correct verbiage in the footer when the board has only been updated once. (Currently says "updated 1 times")
-* Remember (and pre-populate on subsequent loads) the entered Name and Email using a cookie.
-* Create a landing page for the app with a friendly form for creating a new board.
 * Implement a config file for things like the /data directory location
 * Add an admin page for
 	* listing all teams and boards that exist, sorted by last activity date

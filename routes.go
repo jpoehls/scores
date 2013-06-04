@@ -45,7 +45,8 @@ func makeBoardHandler(fn func(http.ResponseWriter, *http.Request, *Board, string
 		//println("URL: " + r.URL.Path)
 		m := urlValidator.FindStringSubmatch(r.URL.Path)
 		if m == nil {
-			http.NotFound(w, r)
+			//http.NotFound(w, r)
+			homepageHandler(w, r)
 			return
 		}
 
@@ -56,6 +57,13 @@ func makeBoardHandler(fn func(http.ResponseWriter, *http.Request, *Board, string
 		}
 
 		fn(w, r, board, m[4])
+	}
+}
+
+func homepageHandler(w http.ResponseWriter, r *http.Request) {
+	if err := views.ExecuteTemplate(w, "home.gohtml", nil); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 }
 
@@ -179,7 +187,7 @@ func init() {
 	}
 
 	// Compile our template.
-	views = template.Must(template.New("board.gohtml").Funcs(funcMap).ParseFiles("./views/board.gohtml"))
+	views = template.Must(template.New("board.gohtml").Funcs(funcMap).ParseFiles("./views/board.gohtml", "./views/home.gohtml"))
 
 	// Register our HTTP handlers.
 	http.HandleFunc("/", makeBoardHandler(viewHandler))
