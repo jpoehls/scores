@@ -125,7 +125,7 @@ func viewHandler(w http.ResponseWriter, r *http.Request, board *Board, action st
 
 		if !recordUpdated {
 			// If we didn't find an existing record to update then add a new one.
-			board.Records = append(board.Records, &Record{Who: who, When: when, Score: score})
+			board.Records = append(board.Records, &Record{Who: who, When: when, Email: email, Score: score})
 			board.ActivityCount++
 		}
 

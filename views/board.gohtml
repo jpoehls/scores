@@ -18,6 +18,7 @@
 
 {{ range $index, $element := takeTop .Board.Records 3 }}
 	<div class="record badged">
+		<img src="{{.GetAvatarUrl}}" class="avatar" />
 		<div class="who">{{.Who}}</div>
 		<div class="when">{{formatTime .When "Jan 2, 2006"}}</div>
 		<div class="score">{{.Score}}</div>
@@ -41,6 +42,7 @@
 
 {{ range skipTop .Board.Records 3 }}
 	<div class="record">
+		<img src="{{.GetAvatarUrl}}" class="avatar" />
 		<div class="who">{{.Who}}</div>
 		<div class="when">{{formatTime .When "Jan 2, 2006"}}</div>
 		<div class="score">{{.Score}}</div>

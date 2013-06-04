@@ -1,10 +1,14 @@
 package main
 
 import (
+	"crypto/md5"
 	"encoding/json"
+	"fmt"
+	"io"
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"strings"
 	"time"
 )
 
@@ -53,6 +57,12 @@ type Record struct {
 	Email string    `json:"email"`
 	When  time.Time `json:"when"`
 	Score int64     `json:"score"`
+}
+
+func (r *Record) GetAvatarUrl() string {
+	h := md5.New()
+	io.WriteString(h, strings.ToLower(r.Email))
+	return "http://www.gravatar.com/avatar/" + fmt.Sprintf("%x", h.Sum(nil)) + "?r=R&s=60&d=mm"
 }
 
 // Gets the file path where the given team and board should be saved.

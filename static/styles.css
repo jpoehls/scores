@@ -53,7 +53,14 @@ h1 span {
 	padding: 10px;
 }
 
+.record .avatar {
+	position: absolute;
+	top:0;
+	left: -60px;
+}
+
 .record {
+	height: 40px;
 	width: 380px;
 	margin: 0 auto;
 	border: 1px solid #ddd;
