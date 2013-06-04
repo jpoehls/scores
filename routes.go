@@ -146,7 +146,10 @@ func viewHandler(w http.ResponseWriter, r *http.Request, board *Board, action st
 		http.Redirect(w, r, "/"+board.Team+"/"+board.Name, http.StatusFound)
 		return
 	} else {
-		if err := views.ExecuteTemplate(w, "board.gohtml", board); err != nil {
+
+		var vm = &BoardViewModel{Board: board, TeamBoards: GetTeamBoardNames(board.Team)}
+
+		if err := views.ExecuteTemplate(w, "board.gohtml", vm); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
@@ -160,6 +163,9 @@ func init() {
 		"formatTime": formatTime,
 		"takeTop":    takeTop,
 		"skipTop":    skipTop,
+		"equals": func(a, b string) bool {
+			return strings.EqualFold(a, b)
+		},
 	}
 
 	// Compile our template.

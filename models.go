@@ -4,8 +4,32 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"os"
+	"path/filepath"
 	"time"
 )
+
+// View model for the scoreboard page.
+type BoardViewModel struct {
+	Board      *Board
+	TeamBoards []string
+}
+
+// Gets a list of all the given team's boards.
+func GetTeamBoardNames(team string) []string {
+	// TODO: Handle the possible error here.
+	files, _ := ioutil.ReadDir("./data/" + team)
+
+	boardNames := make([]string, 0, len(files))
+
+	for i := range files {
+		if !files[i].IsDir() {
+			filename := files[i].Name()
+			boardNames = append(boardNames, filename[0:len(filename)-len(filepath.Ext(filename))])
+		}
+	}
+
+	return boardNames
+}
 
 type Board struct {
 	Team          string  `json:"team"`

@@ -24,13 +24,14 @@ Only the top 10 scores are kept.
 * Use correct verbiage in the footer when the board has only been updated once. (Currently says "updated 1 times")
 * Remember (and pre-populate on subsequent loads) the entered Name and Email using a cookie.
 * Show Gravatar next to each record.
-* Show a menu of other boards owned by the current team.
 * Create a landing page for the app with a friendly form for creating a new board.
 * Implement a config file for things like the /data directory location
 * Add an admin page for
 	* listing all teams and boards that exist, sorted by last activity date
 	* deleting boards
 	* clearing scores on a board (without deleting the board itself)
+* Ability to share your high score on FB. (Knowing full well that making your board's URL public means anyone can ruin it. Careful who you share it with.)
+* Show human friendly relative timestamps. i.e. "yesterday", "last monday", etc (create a go package for this?)
 
 #### Refactoring
 

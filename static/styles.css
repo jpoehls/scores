@@ -2,6 +2,8 @@ body {
 	background-color: #eee;
 	font-family: Helvetica, Arial, sans-serif;
 	color: #555;
+	margin:0;
+	padding:0;
 }
 
 body > p, footer > p {
@@ -94,4 +96,30 @@ h1 span {
 
 .record.badged .score {
 	right:40px;
+}
+
+#team-boards {
+	list-style-type: none;
+	padding: 10px;
+	padding-right: 30px;
+	margin:0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: 15px;
+	color: #777;
+	border-left: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+}
+
+#team-boards li {
+	line-height: 1.5em
+}
+
+#team-boards .team-name {
+	font-weight: bold;
+}
+
+#team-boards .current {
+	background-color: #ddd;
 }

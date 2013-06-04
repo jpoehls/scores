@@ -1,22 +1,22 @@
 <html>
 <head>
-	<title>{{.Team}} / {{.Name}}</title>
+	<title>{{.Board.Team}} / {{.Board.Name}}</title>
 	<meta name="robots" content="noindex,nofollow">
 	<link rel="stylesheet" href="/static/styles.css" />
 </head>
 <body>
 
-<h1><span>{{.Team}} /</span> {{.Name}}</h1>
+<h1><span>{{.Board.Team}} /</span> {{.Board.Name}}</h1>
 
-{{ if .Records }}
-	{{ if .Desc }}
-		<p contenteditable="true" id="board-desc">{{.Desc}}</p>
+{{ if .Board.Records }}
+	{{ if .Board.Desc }}
+		<p contenteditable="true" id="board-desc">{{.Board.Desc}}</p>
 	{{ else }}
 		<p contenteditable="true" id="board-desc">Click to enter a spiffy proclamation for this board.</p>
 	{{ end }}
 {{ end }}
 
-{{ range $index, $element := takeTop .Records 3 }}
+{{ range $index, $element := takeTop .Board.Records 3 }}
 	<div class="record badged">
 		<div class="who">{{.Who}}</div>
 		<div class="when">{{formatTime .When "Jan 2, 2006"}}</div>
@@ -31,7 +31,7 @@
 {{ end }}
 
 <div class="new-record">
-	<form action="/{{.Team}}/{{.Name}}" method="POST">
+	<form action="/{{.Board.Team}}/{{.Board.Name}}" method="POST">
 		<input type="text" name="who" placeholder="Name" required />
 		<input type="email" name="email" placeholder="Email" />
 		<input type="number" name="score" placeholder="Score" min="0" max="9999" required />
@@ -39,7 +39,7 @@
 	</form>
 </div>
 
-{{ range skipTop .Records 3 }}
+{{ range skipTop .Board.Records 3 }}
 	<div class="record">
 		<div class="who">{{.Who}}</div>
 		<div class="when">{{formatTime .When "Jan 2, 2006"}}</div>
@@ -47,9 +47,20 @@
 	</div>
 {{ end }}
 
+<ul id="team-boards">
+	<li class="team-name">{{ .Board.Team }}</li>
+	{{ range .TeamBoards }}
+		{{ if equals . $.Board.Name }}
+			<li class="current">{{.}}</li>
+		{{ else }}
+			<li><a href="/{{$.Board.Team}}/{{.}}">{{.}}</a></li>
+		{{ end }}
+	{{ end }}
+</ul>
+
 <footer>
-	{{ if .Records }}
-		<p><i>This board has been updated {{.ActivityCount}} times.</i></p>
+	{{ if .Board.Records }}
+		<p><i>This board has been updated {{.Board.ActivityCount}} times.</i></p>
 	{{ end }}
 </footer>
 
