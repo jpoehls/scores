@@ -16,6 +16,8 @@ import (
 type BoardViewModel struct {
 	Board      *Board
 	TeamBoards []string
+	Who        string
+	Email      string
 }
 
 // Gets a list of all the given team's boards.

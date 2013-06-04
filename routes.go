@@ -94,7 +94,9 @@ func viewHandler(w http.ResponseWriter, r *http.Request, board *Board, action st
 
 		// Store the last entered information in a cookie so we can populate
 		// the form with it in the future.
-		cookie := &http.Cookie{Name: "memory", Value: "who"}
+		cookie := &http.Cookie{Name: "who", Value: who}
+		http.SetCookie(w, cookie)
+		cookie = &http.Cookie{Name: "email", Value: email}
 		http.SetCookie(w, cookie)
 
 		recordUpdated := false
@@ -148,6 +150,14 @@ func viewHandler(w http.ResponseWriter, r *http.Request, board *Board, action st
 	} else {
 
 		var vm = &BoardViewModel{Board: board, TeamBoards: GetTeamBoardNames(board.Team)}
+		cookie, _ := r.Cookie("who")
+		if cookie != nil {
+			vm.Who = cookie.Value
+		}
+		cookie, _ = r.Cookie("email")
+		if cookie != nil {
+			vm.Email = cookie.Value
+		}
 
 		if err := views.ExecuteTemplate(w, "board.gohtml", vm); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)

@@ -33,8 +33,8 @@
 
 <div class="new-record">
 	<form action="/{{.Board.Team}}/{{.Board.Name}}" method="POST">
-		<input type="text" name="who" placeholder="Name" required />
-		<input type="email" name="email" placeholder="Email" />
+		<input type="text" name="who" placeholder="Name" value="{{.Who}}" required />
+		<input type="email" name="email" placeholder="Email" value="{{.Email}}" />
 		<input type="number" name="score" placeholder="Score" min="0" max="9999" required />
 		<input type="submit" value="Post" />
 	</form>
