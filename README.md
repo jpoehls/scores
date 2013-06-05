@@ -21,6 +21,7 @@ Only the top 10 scores are kept.
 
 #### Features
 
+* Reload templates on change in development.
 * Add a login system. If signed in, boards created are linked to your user. You are made the "owner". You can delete and reset boards you own. (Store all users in a single JSON file. Owned boards are listed in `users.json`)
 * Use correct verbiage in the footer when the board has only been updated once. (Currently says "updated 1 times")
 * Implement a config file for things like the /data directory location
